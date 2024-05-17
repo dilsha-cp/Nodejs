@@ -1,0 +1,10 @@
+//npm" is Node Package Manager. It is a package manager for JavaScript 
+and is the default package manager for the Node.js 
+JavaScript runtime environment.
+ npm allows developers to share and reuse code, manage dependencies, 
+ and easily install libraries and tools necessary for their projects.
+
+
+
+
+
