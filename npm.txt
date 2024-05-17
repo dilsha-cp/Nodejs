@@ -3,6 +3,9 @@ and is the default package manager for the Node.js
 JavaScript runtime environment.
  npm allows developers to share and reuse code, manage dependencies, 
  and easily install libraries and tools necessary for their projects.
+ //semantic versioning
+ the way of writing is called semantic represent "figlet": "^1.7.0" in package.json
+ major and minor patches
 
 
 
