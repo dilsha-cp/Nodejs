@@ -6,9 +6,18 @@
 
 const express = require('express');
 const app = express();
+//third party middleware
+const morgan=require('morgan')
+//for middleware
+const mymidwarefn=require('./middleware/middle')
+const mymidwarefn2=require('./middleware/middle2')
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+//custom midware
+app.use(mymidwarefn)
+app.use(mymidwarefn2)
+app.use(morgan('tiny'))
 
 // Sample data as an array
 let courses = [
@@ -38,14 +47,14 @@ app.get('/courses', (req, res) => {
 });
 
 // Get a course by ID
-app.get('/course/:id', (req, res) => {
+app.get('/courses/:id', (req, res) => {
     const course = courses.find(course => course.id === parseInt(req.params.id));
     if (!course) return res.status(404).send('Course not found');
     res.send(course);
 });
 
 // Get a course by name
-app.get('/course1/:name', (req, res) => {
+app.get('/courses/:name', (req, res) => {
     const course = courses.find(course => course.name === req.params.name);
     if (!course) return res.status(404).send('Course not found');
     res.send(course);
@@ -54,7 +63,7 @@ app.get('/course1/:name', (req, res) => {
 // Create a new course
 app.post('/courses', (req, res) => {
     const course = {
-        id: courses.length ? courses[courses.length - 1].id + 1 : 1,  // Ensure unique ID
+        id: courses.length+1 ,  // Ensure unique ID
         name: req.body.name
     };
     courses.push(course);
