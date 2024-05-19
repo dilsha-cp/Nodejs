@@ -5,25 +5,47 @@ mongoose.connect('mongodb://localhost/testdatabase')//if localhost is not connec
 .catch(error=>console.console.error('failed',error))
 //schema
 const courseSchema=new mongoose.Schema({
-    name:String,
-    author:String,
+    name:{type:String,required:true,minlength:1,maxlength:10},//for datavalidation if required is false that data is not cumpulsory
+    author:{type:String,required:true},
+    //custom data validator
+    tags:{type:Array,required:true,validate:{
+        validator:function(v){
+            v.length>1
+        }
+    }},
+    //inbuilt data validator
+    category:{
+        type:String,
+        required:true,
+        enum:['frontend','backend','analatics']//enum check the category with in the array if it is not match show error
+    },
     publishDate:{type:Date,default:Date.now},
-    ispublish:Boolean,
-    rating:Number
+    ispublish:{type:String,required:true},
+    rating:{type:Number,required:function(){return this.ispublish}}//it check the function ispublised
 })
 //to create model for the schema
 const Course=mongoose.model('Course',courseSchema)
 //to add data
 async function create(){
     const course=new Course({
-        name:'java',
-        author:'ghi',
-        ispublish:true,
-        rating:4
+        name:'java8',
+         author:'asd',
+         tags:['express','mongo'],
+         category:'backend',
+         ispublish:true,
+         rating:4.5
 
     })
-    const result=await course.save()
-    console.log(result)
+    try {
+        const result=await course.save()
+        console.log('data entered')
+        
+    } catch (error) {
+        for(feild in error.errors)
+            console.log(error.errors[feild])
+        
+    }
+    
 }
 create()
 //to get data
