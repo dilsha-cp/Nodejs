@@ -7,7 +7,7 @@
 const express = require('express');
 const app = express();
 //third party middleware
-const morgan=require('morgan')
+const morgan=require('morgan')//install morgon from express 
 //for middleware
 const mymidwarefn=require('./middleware/middle')
 const mymidwarefn2=require('./middleware/middle2')

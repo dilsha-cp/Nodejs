@@ -2,7 +2,7 @@ const mongoose=require('mongoose')
 //to connect with database
 mongoose.connect('mongodb://localhost/testdatabase')//if localhost is not connected giv 127.0.01
 .then(()=>console.log('connected successfully'))
-.catch(error=>console.console.error('failed',error))
+.catch(error=>console.error('failed',error))
 //schema
 const courseSchema=new mongoose.Schema({
     name:{type:String,required:true,minlength:1,maxlength:10},//for datavalidation if required is false that data is not cumpulsory
